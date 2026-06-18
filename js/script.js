@@ -183,6 +183,7 @@ function renderCollections() {
     container.innerHTML = '';
     const navHtml = [];
     cols.forEach(col => {
+        if (col.id === 1) return;
         const items = products.filter(p => p.collectionId === col.id);
         if (!items.length) return;
         if (col.id === 4) {
