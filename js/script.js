@@ -35,82 +35,23 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// ── Horizontal Gallery Drag & Arrow ──
-function smoothScrollTo(el, targetX, duration) {
-    const start = el.scrollLeft;
-    const distance = targetX - start;
-    const startTime = performance.now();
-    function step(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const ease = 1 - Math.pow(1 - progress, 3);
-        el.scrollLeft = start + distance * ease;
-        if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-}
-
+// ── Gallery (image click) ──
 function initGalleries() {
 document.querySelectorAll('.gallery-section').forEach(section => {
-    const track = section.querySelector('.gallery-track');
-    const galleryScroll = section.querySelector('.horizontal-gallery');
-    if (!track || !galleryScroll) return;
-
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    track.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - track.offsetLeft;
-        scrollLeft = galleryScroll.scrollLeft;
-        track.style.cursor = 'grabbing';
+    section.querySelectorAll('.gallery-img').forEach(img => {
+        img.addEventListener('click', () => {
+            const src = img.getAttribute('src');
+            if (!src) return;
+            const ov = document.createElement('div');
+            ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
+            const full = document.createElement('img');
+            full.src = src;
+            full.style.cssText = 'max-width:95vw;max-height:95vh;object-fit:contain;';
+            ov.appendChild(full);
+            ov.addEventListener('click', () => ov.remove());
+            document.body.appendChild(ov);
+        });
     });
-
-    track.addEventListener('mouseleave', () => {
-        isDown = false;
-        track.style.cursor = 'grab';
-    });
-
-    track.addEventListener('mouseup', () => {
-        isDown = false;
-        track.style.cursor = 'grab';
-    });
-
-    track.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - track.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        galleryScroll.scrollLeft = scrollLeft - walk;
-    });
-
-    track.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX - track.offsetLeft;
-        scrollLeft = galleryScroll.scrollLeft;
-    }, { passive: true });
-
-    track.addEventListener('touchmove', (e) => {
-        const x = e.touches[0].pageX - track.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        galleryScroll.scrollLeft = scrollLeft - walk;
-    }, { passive: true });
-
-    const leftBtn = section.querySelector('.gallery-arrow-left');
-    const rightBtn = section.querySelector('.gallery-arrow-right');
-
-    function scrollGallery(dir) {
-        const item = track.querySelector('.gallery-item');
-        if (!item) return;
-        const itemWidth = item.offsetWidth;
-        const gap = 16;
-        const scrollAmount = itemWidth + gap;
-        const targetX = galleryScroll.scrollLeft + dir * scrollAmount;
-        smoothScrollTo(galleryScroll, targetX, 500);
-    }
-
-    if (leftBtn) leftBtn.addEventListener('click', () => scrollGallery(-1));
-    if (rightBtn) rightBtn.addEventListener('click', () => scrollGallery(1));
 });
 }
 
@@ -124,15 +65,15 @@ const DEFAULT_COLLECTIONS = [
 ];
 
 const DEFAULT_PRODUCTS = [
-    { id: 0, image: "images/june.jpg", look: "Look 01", name: "Wool Tailored Blazer", desc: "Single-breasted blazer cut from Italian virgin wool. Structured shoulders with a softened waist.", materials: "100% Virgin Wool, Horn Buttons, Cupro lining", model: "Anna, 178 cm", fit: "True to size", height: 600, collectionId: 0 },
-    { id: 1, image: "images/gallery-3.jpg", look: "Look 02", name: "Organic Cotton Shirt", desc: "Oversized button-down in organic cotton poplin. Extended cuffs, hidden placket.", materials: "100% Organic Cotton, Mother-of-Pearl Buttons", model: "Maria, 174 cm", fit: "Oversized fit", height: 600, collectionId: 0 },
-    { id: 2, image: "images/gallery-3.jpg", look: "Look 03", name: "Silk Drape Dress", desc: "Floor-length dress in liquid silk crepe. Asymmetric neckline with a single draped sleeve.", materials: "100% Silk Crepe, Silk Organza trim", model: "Sofia, 176 cm", fit: "True to size", height: 600, collectionId: 1 },
-    { id: 3, image: "images/July.jpg", look: "Look 04", name: "Linen Wide Trousers", desc: "High-waisted wide-leg trousers in linen blend. Pleated front with side pockets.", materials: "70% Linen, 30% Cotton, Cotton waistband", model: "Anna, 178 cm", fit: "True to size. High-waisted cut", height: 600, collectionId: 1 },
-    { id: 4, image: "images/July (2).jpg", look: "Look 05", name: "Slate Double-Breasted Jacket", desc: "Double-breasted jacket in heavy wool crepe. Notched lapel, flap pockets.", materials: "100% Wool Crepe, Viscose lining", model: "Maria, 174 cm", fit: "Tailored fit", height: 600, collectionId: 2 },
-    { id: 5, image: "images/june.jpg", look: "Look 06", name: "Ivory Silk Blouse", desc: "Relaxed blouse in ivory silk charmeuse. Deep V-neck with a self-tie front closure.", materials: "100% Silk Charmeuse, Shell Buttons", model: "Sofia, 176 cm", fit: "Relaxed fit", height: 600, collectionId: 2 },
-    { id: 6, image: "images/june.jpg", look: "Look 07", name: "June Look", desc: "Light summer silhouette in soft ivory.", materials: "100% Linen", model: "—", fit: "Relaxed fit", height: 600, collectionId: 0 },
-    { id: 7, image: "images/July.jpg", look: "Look 08", name: "Dark Silhouette", desc: "Bold black and red composition.", materials: "100% Wool", model: "—", fit: "Tailored fit", height: 600, collectionId: 4 },
-    { id: 8, image: "images/July (2).jpg", look: "Look 09", name: "Pink Door Frame", desc: "Soft silhouette with architectural detail.", materials: "100% Linen", model: "—", fit: "Relaxed fit", height: 600, collectionId: 3 }
+    { id: 0, image: "images/june.jpg", look: "Look 01", name: "Wool Tailored Blazer", desc: "Single-breasted blazer cut from Italian virgin wool. Structured shoulders with a softened waist.", materials: "100% Virgin Wool, Horn Buttons, Cupro lining", model: "Anna, 178 cm", fit: "True to size", height: 600, size: "small", collectionId: 0 },
+    { id: 1, image: "images/gallery-3.jpg", look: "Look 02", name: "Organic Cotton Shirt", desc: "Oversized button-down in organic cotton poplin. Extended cuffs, hidden placket.", materials: "100% Organic Cotton, Mother-of-Pearl Buttons", model: "Maria, 174 cm", fit: "Oversized fit", height: 600, size: "small", collectionId: 0 },
+    { id: 2, image: "images/gallery-3.jpg", look: "Look 03", name: "Silk Drape Dress", desc: "Floor-length dress in liquid silk crepe. Asymmetric neckline with a single draped sleeve.", materials: "100% Silk Crepe, Silk Organza trim", model: "Sofia, 176 cm", fit: "True to size", height: 600, size: "small", collectionId: 1 },
+    { id: 3, image: "images/July.jpg", look: "Look 04", name: "Linen Wide Trousers", desc: "High-waisted wide-leg trousers in linen blend. Pleated front with side pockets.", materials: "70% Linen, 30% Cotton, Cotton waistband", model: "Anna, 178 cm", fit: "True to size. High-waisted cut", height: 600, size: "small", collectionId: 1 },
+    { id: 4, image: "images/July (2).jpg", look: "Look 05", name: "Slate Double-Breasted Jacket", desc: "Double-breasted jacket in heavy wool crepe. Notched lapel, flap pockets.", materials: "100% Wool Crepe, Viscose lining", model: "Maria, 174 cm", fit: "Tailored fit", height: 600, size: "small", collectionId: 2 },
+    { id: 5, image: "images/june.jpg", look: "Look 06", name: "Ivory Silk Blouse", desc: "Relaxed blouse in ivory silk charmeuse. Deep V-neck with a self-tie front closure.", materials: "100% Silk Charmeuse, Shell Buttons", model: "Sofia, 176 cm", fit: "Relaxed fit", height: 600, size: "small", collectionId: 2 },
+    { id: 6, image: "images/june.jpg", look: "Look 07", name: "June Look", desc: "Light summer silhouette in soft ivory.", materials: "100% Linen", model: "—", fit: "Relaxed fit", height: 600, size: "small", collectionId: 0 },
+    { id: 7, image: "images/July.jpg", look: "Look 08", name: "Dark Silhouette", desc: "Bold black and red composition.", materials: "100% Wool", model: "—", fit: "Tailored fit", height: 600, size: "small", collectionId: 4 },
+    { id: 8, image: "images/July (2).jpg", look: "Look 09", name: "Pink Door Frame", desc: "Soft silhouette with architectural detail.", materials: "100% Linen", model: "—", fit: "Relaxed fit", height: 600, size: "small", collectionId: 3 }
 ];
 
 function getCollections() {
@@ -187,19 +128,17 @@ function renderCollections() {
         sec.className = 'gallery-section';
         sec.id = `col-${col.id}`;
         sec.innerHTML = `<h2 class="collection-right-title">${col.name}</h2>
-            <div class="horizontal-gallery">
-            <div class="gallery-track">
-                ${items.map((p, pi) => {
+            <div class="gallery-grid">
+                ${items.map(p => {
                     const idx = products.indexOf(p);
+                    const size = p.size || 'small';
                     const h = p.height || 600;
-                    return `<div class="gallery-item" data-product="${idx}">
-                        <img src="${p.image}" class="gallery-img" style="min-width: ${380 + pi * 30}px; height: ${h}px;">
+                    const cls = size !== 'small' ? ' gallery-item size-' + size : ' gallery-item';
+                    return `<div class="${cls}" data-product="${idx}">
+                        <img src="${p.image}" class="gallery-img" style="height: ${h}px;">
                     </div>`;
                 }).join('')}
-            </div>
-        </div>
-            <button class="gallery-arrow gallery-arrow-left" aria-label="Previous">&#8592;</button>
-            <button class="gallery-arrow gallery-arrow-right" aria-label="Next">&#8594;</button>`;
+            </div>`;
         container.appendChild(sec);
         navHtml.push(`<a href="#col-${col.id}" onclick="event.preventDefault();document.getElementById('col-${col.id}').scrollIntoView({behavior:'smooth'});return false;">${col.name}</a>`);
     });
