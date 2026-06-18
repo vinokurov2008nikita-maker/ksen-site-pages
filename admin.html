@@ -135,11 +135,11 @@
 
     <script>
         const DEFAULT_COLLECTIONS = [
-            { id: 0, name: "June" },
-            { id: 1, name: "July" },
-            { id: 2, name: "August" },
-            { id: 3, name: "0'9" },
-            { id: 4, name: "1'0" }
+            { id: 0, name: "June", video: "" },
+            { id: 1, name: "July", video: "" },
+            { id: 2, name: "August", video: "" },
+            { id: 3, name: "0'9", video: "" },
+            { id: 4, name: "1'0", video: "" }
         ];
         const DEFAULT_PRODUCTS = [
             { id: 0, image: "images/june.jpg", look: "Look 01", name: "Wool Tailored Blazer", desc: "Single-breasted blazer cut from Italian virgin wool.", materials: "100% Virgin Wool, Horn Buttons", model: "Ксения, 178 cm", fit: "True to size", collectionId: 0 },
@@ -240,6 +240,8 @@
             document.getElementById('formFields').innerHTML = `
                 <label>Collection Name</label>
                 <input type="text" id="fldName" placeholder="June" value="${col ? col.name : ''}">
+                <label>Video URL (optional)</label>
+                <input type="text" id="fldVideo" placeholder="images/my-video.mp4" value="${col ? (col.video || '') : ''}">
             `;
             document.getElementById('formOverlay').classList.add('active');
         }
@@ -342,12 +344,13 @@
             if (type === 'collection') {
                 const cols = getCollections();
                 const name = document.getElementById('fldName').value.trim();
+                const video = document.getElementById('fldVideo').value.trim();
                 if (!name) return showToast('Enter a name');
                 if (id !== '') {
                     const col = cols.find(c => c.id === parseInt(id));
-                    if (col) col.name = name;
+                    if (col) { col.name = name; col.video = video; }
                 } else {
-                    cols.push({ id: cols.length ? Math.max(...cols.map(c => c.id)) + 1 : 0, name });
+                    cols.push({ id: cols.length ? Math.max(...cols.map(c => c.id)) + 1 : 0, name, video });
                 }
                 saveCollections(cols);
                 closeForm();

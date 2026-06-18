@@ -116,11 +116,11 @@ document.querySelectorAll('.gallery-section').forEach(section => {
 
 // ── Collections & Products Data ──
 const DEFAULT_COLLECTIONS = [
-    { id: 0, name: "June" },
-    { id: 1, name: "July" },
-    { id: 2, name: "August" },
-    { id: 3, name: "0'9" },
-    { id: 4, name: "1'0" }
+    { id: 0, name: "June", video: "" },
+    { id: 1, name: "July", video: "" },
+    { id: 2, name: "August", video: "" },
+    { id: 3, name: "0'9", video: "" },
+    { id: 4, name: "1'0", video: "" }
 ];
 
 const DEFAULT_PRODUCTS = [
@@ -177,6 +177,12 @@ function renderCollections() {
     cols.forEach(col => {
         const items = products.filter(p => p.collectionId === col.id);
         if (!items.length) return;
+        if (col.video) {
+            const vidSec = document.createElement('section');
+            vidSec.className = 'video-break';
+            vidSec.innerHTML = `<video class="full-video" autoplay muted loop playsinline poster="images/hero.jpg"><source src="${col.video}" type="video/mp4"></video>`;
+            container.appendChild(vidSec);
+        }
         const sec = document.createElement('section');
         sec.className = 'gallery-section';
         sec.id = `col-${col.id}`;
@@ -213,6 +219,12 @@ function renderCollections() {
 
 // Init galleries on index page (static), render on collection page (dynamic)
 if (document.getElementById('collections-container')) {
+    const id = new URLSearchParams(location.search).get('id');
+    if (id) {
+        const col = getCollections().find(c => c.id === parseInt(id));
+        const heroTitle = document.getElementById('heroTitle');
+        if (col && heroTitle) heroTitle.textContent = col.name;
+    }
     renderCollections();
 } else {
     initGalleries();
