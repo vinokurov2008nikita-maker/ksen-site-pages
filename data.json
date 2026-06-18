@@ -1,0 +1,199 @@
+﻿{
+    "collections":  [
+                        {
+                            "id":  3,
+                            "name":  "0\u00279",
+                            "video":  ""
+                        },
+                        {
+                            "id":  4,
+                            "name":  "1\u00270",
+                            "video":  "images/cellection2.mp4"
+                        }
+                    ],
+    "products":  [
+                     {
+                         "id":  7,
+                         "image":  "images/July.jpg",
+                         "look":  "Look 08",
+                         "name":  "Dark Silhouette",
+                         "desc":  "Bold black and red composition.",
+                         "materials":  "100% Wool",
+                         "model":  "\u2014",
+                         "fit":  "Tailored fit",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  4
+                     },
+                     {
+                         "image":  "images/photo_8.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  3,
+                         "id":  8
+                     },
+                     {
+                         "image":  "images/photo_13.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  3,
+                         "id":  13
+                     },
+                     {
+                         "image":  "images/photo_10.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  3,
+                         "id":  10
+                     },
+                     {
+                         "image":  "images/photo_16.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  3,
+                         "id":  16
+                     },
+                     {
+                         "image":  "images/photo_11.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  3,
+                         "id":  11
+                     },
+                     {
+                         "image":  "images/photo_9.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  3,
+                         "id":  9
+                     },
+                     {
+                         "image":  "images/photo_14.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  3,
+                         "id":  14
+                     },
+                     {
+                         "image":  "images/photo_12.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  3,
+                         "id":  12
+                     },
+                     {
+                         "image":  "images/photo_15.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  3,
+                         "id":  15
+                     },
+                     {
+                         "image":  "images/photo_17.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  4,
+                         "id":  17
+                     },
+                     {
+                         "image":  "images/photo_18.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  4,
+                         "id":  18
+                     },
+                     {
+                         "image":  "images/photo_19.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  4,
+                         "id":  19
+                     },
+                     {
+                         "image":  "images/photo_20.jpg",
+                         "look":  "",
+                         "name":  "",
+                         "desc":  "",
+                         "materials":  "",
+                         "model":  "",
+                         "fit":  "",
+                         "height":  600,
+                         "size":  "small",
+                         "collectionId":  4,
+                         "id":  20
+                     }
+                 ]
+}
+
