@@ -203,12 +203,6 @@ function renderCollections() {
     cols.forEach(col => {
         const items = products.filter(p => p.collectionId === col.id);
         if (!items.length) return;
-        if (cols.indexOf(col) > 0) {
-            const badge = document.createElement('div');
-            badge.className = 'section-badge';
-            badge.textContent = 'KSΞN';
-            container.appendChild(badge);
-        }
         const sec = document.createElement('section');
         sec.className = 'gallery-section';
         sec.id = `col-${col.id}`;
