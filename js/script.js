@@ -216,7 +216,7 @@ function renderCollections() {
         sec.innerHTML = lastCol && col.id === lastCol.id
             ? `<section class="video-break" style="height:80vh;position:relative;">
                     <video class="full-video" autoplay muted loop playsinline><source src="images/cellection2.mp4" type="video/mp4"></video>
-                    <div style="position:absolute;top:24px;left:24px;z-index:3;font-size:13px;font-weight:300;letter-spacing:4px;text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.5);background:rgba(0,0,0,0.3);padding:6px 14px;">${col.name}</div>
+                    <div style="position:absolute;bottom:48px;left:0;z-index:3;font-size:13px;font-weight:300;letter-spacing:4px;text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.5);background:rgba(0,0,0,0.3);padding:8px 20px;">${col.name}</div>
                 </section>
                 <h2 class="collection-right-title">${col.name}</h2>
                 <div class="gallery-wrapper">
