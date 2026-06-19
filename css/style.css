@@ -426,6 +426,7 @@ nav.scrolled {
 
 /* ── Horizontal Gallery ── */
 .gallery-section {
+    margin-bottom: 80px;
 }
 
 .gallery-wrapper {
